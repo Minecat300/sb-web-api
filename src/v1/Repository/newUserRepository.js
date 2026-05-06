@@ -9,7 +9,7 @@ export async function addNewEmployee(employee) {
     try {
         const { first_name, last_name, display_name, username, email, start_date, department } = employee;
         const [result] = await conn.query(
-            `INSERT INTO NEW_EMPLOYEES (id, first_name, last_name, display_name, username, email, start_date, department, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            `INSERT INTO NEW_EMPLOYEES (employee_id, first_name, last_name, display_name, username, email, start_date, department, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [id, first_name, last_name, display_name, username, email, start_date, department, 'pending']
         );
         return { id: result.insertId, ...employee };
