@@ -4,9 +4,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
-dotenv.config();
+dotenv.config({ path: "../.env", debug: true });
 
 import authRoutes from "./v1/routes/authRoutes.js";
+import newEmployeeRoutes from "./v1/routes/newUserRoutes.js";
 
 const PORT = 3868;
 
@@ -14,8 +15,6 @@ const app = express();
 
 // Middlewares
 app.use(bodyParser.json());
-app.use(cookieParser());
-// Disabled Cors for production
 app.use(cors({
     origin: "*"
 }));
@@ -24,6 +23,7 @@ app.use(cors({
 
 //localhost:3868/api/v1/auth
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/new-employees', newEmployeeRoutes);
 
 app.listen(PORT, () => {
     console.log(`This HTTP app is running on port: ${PORT}`);

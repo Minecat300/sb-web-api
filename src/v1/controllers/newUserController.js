@@ -8,7 +8,7 @@ import {
     getNewEmployeeById,
     getNewEmployeeByStatus,
     getNewEmployeeByUsername
-} from "../Repository/newUserRepository";
+} from "../Repository/newUserRepository.js";
 
 export const createNewEmployee = async (req, res) => {
     try {

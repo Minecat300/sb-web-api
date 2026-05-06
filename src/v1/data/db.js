@@ -28,6 +28,8 @@ export async function getPool() {
         const user = process.env.DB_USER;
         const database = process.env.DB_NAME;
 
+        console.log(DB_PASSWORD, host, user, database);
+
         pool = await mysql.createPool({
             host,
             user,
