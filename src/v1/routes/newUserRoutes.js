@@ -9,7 +9,10 @@ import {
     getNewEmployeesByStatus,
     getNewEmployees,
     updateNewEmployeeController,
-    deleteNewEmployeeController
+    deleteNewEmployeeController,
+    getAllActiveNewEmployees,
+    getAllInactiveNewEmployees,
+    getAllPendingNewEmployees
 } from "../controllers/newUserController.js";
 import { authenticateToken, authorizeRole } from "../middleware/authMiddleware.js";
 
@@ -26,6 +29,9 @@ router.get('/active', authenticateToken, authorizeRole('management', 'admin'), g
 
 //GET | localhost:3868/api/v1/new-employees/inactive
 router.get('/inactive', authenticateToken, authorizeRole('management', 'admin'), getAllInactiveNewEmployees);
+
+//GET | localhost:3868/api/v1/new-employees/pending
+router.get('/pending', authenticateToken, authorizeRole('management', 'admin'), getAllPendingNewEmployees);
 
 //GET | localhost:3868/api/v1/new-employees/:id
 router.get('/:id', authenticateToken, authorizeRole('management', 'admin'), getNewEmployee);

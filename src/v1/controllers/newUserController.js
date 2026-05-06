@@ -9,7 +9,8 @@ import {
     getNewEmployeeByStatus,
     getNewEmployeeByUsername,
     getAllActiveNewEmployees,
-    getAllInactiveNewEmployees
+    getAllInactiveNewEmployees,
+    getAllPendingNewEmployees
 } from "../Repository/newUserRepository.js";
 
 /* CREATE */
@@ -191,5 +192,15 @@ export const getAllInactiveNewEmployeesController = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to fetch inactive employees" });
+    }
+};
+
+export const getAllPendingNewEmployeesController = async (req, res) => {
+     try {
+        const employees = await getAllPendingNewEmployees();
+        res.status(200).json(employees);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to fetch pending employees" });
     }
 };
