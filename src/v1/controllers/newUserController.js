@@ -7,7 +7,9 @@ import {
     updateNewEmployee,
     getNewEmployeeById,
     getNewEmployeeByStatus,
-    getNewEmployeeByUsername
+    getNewEmployeeByUsername,
+    getAllActiveNewEmployees,
+    getAllInactiveNewEmployees
 } from "../Repository/newUserRepository.js";
 
 /* CREATE */
@@ -169,5 +171,25 @@ export const deactivateNewEmployeeController = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to deactivate employee" });
+    }
+};
+
+export const getAllActiveNewEmployeesController = async (req, res) => {
+    try {
+        const employees = await getAllActiveNewEmployees();
+        res.status(200).json(employees);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to fetch active employees" });
+    }
+};
+
+export const getAllInactiveNewEmployeesController = async (req, res) => {
+    try {
+        const employees = await getAllInactiveNewEmployees();
+        res.status(200).json(employees);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to fetch inactive employees" });
     }
 };

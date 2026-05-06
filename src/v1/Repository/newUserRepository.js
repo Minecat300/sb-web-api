@@ -24,13 +24,52 @@ export async function getAllNewEmployees() {
     const pool = await getPool();
     const conn = await pool.getConnection();
     try {
-        const [rows] = await conn.query(`SELECT * FROM NEW_EMPLOYEES WHERE status = 'pending'`);
+        const [rows] = await conn.query(`SELECT * FROM NEW_EMPLOYEES`);
         return rows;
     } catch (error) {
         throw error;
     } finally {
         conn.release();
     }   
+}
+
+export async function getAllPendingNewEmployees() {
+    const pool = await getPool();
+    const conn = await pool.getConnection();
+    try {
+        const [rows] = await conn.query(`SELECT * FROM NEW_EMPLOYEES WHERE status = 'pending'`);
+        return rows;
+    } catch (error) {
+        throw error;
+    } finally {
+        conn.release();
+    }  
+}
+
+export async function getAllActiveNewEmployees() {
+    const pool = await getPool();
+    const conn = await pool.getConnection();
+    try {
+        const [rows] = await conn.query(`SELECT * FROM NEW_EMPLOYEES WHERE status = 'active'`);
+        return rows;
+    } catch (error) {
+        throw error;
+    } finally {
+        conn.release();
+    }
+}
+
+export async function getAllInactiveNewEmployees() {
+    const pool = await getPool();
+    const conn = await pool.getConnection();
+    try {
+        const [rows] = await conn.query(`SELECT * FROM NEW_EMPLOYEES WHERE status = 'inactive'`);
+        return rows;
+    } catch (error) {
+        throw error;
+    } finally {
+        conn.release();
+    }
 }
 
 export async function activateNewEmployee(id) {
