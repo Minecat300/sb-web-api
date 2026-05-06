@@ -1,6 +1,6 @@
 import express from "express";
 
-import { register, login, logout, deleteAccount, getUserByUsername, getUsers, deleteAccountById } from "../controllers/authController.js";
+import { register, login, deleteAccount, getUserByUsername, getUsers, deleteAccountById } from "../controllers/authController.js";
 import { authenticateToken, authorizeRole } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -15,13 +15,10 @@ router.get('/user/:username', authenticateToken, authorizeRole('admin'), getUser
 router.delete('/user/:uuid', authenticateToken, authorizeRole('admin'), deleteAccountById);
 
 //POST | localhost:3868/api/v1/auth/register
-router.post('/register', authenticateToken, authorizeRole('admin'), register);
+router.post('/register', authenticateToken, register);
 
 //POST | localhost:3868/api/v1/auth/login
 router.post('/login', login);
-
-//POST | localhost:3868/api/v1/auth/logout
-router.post('/logout', authenticateToken, logout);
 
 //DELETE | localhost:3868/api/v1/auth/delete
 router.delete('/delete', authenticateToken, authorizeRole('admin'), deleteAccount);

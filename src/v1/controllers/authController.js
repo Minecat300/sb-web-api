@@ -1,4 +1,4 @@
-import { createUser, fetchUser, deleteUserById, deleteUserByUsername, fetchUsers } from "../data/accountDB.js";
+import { createUser, fetchUser, deleteUserById, deleteUserByUsername, fetchUsers } from "../Repository/accountRepository.js";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -53,35 +53,18 @@ export const login = async (req, res) => {
             { expiresIn: "1h" }
         );
 
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "lax",
-            maxAge: 60 * 60 * 1000
-        });
-
         return res.status(200).json({
             message: "Logged in",
             username: user.username,
             roles: user.roles,
-            uuid: user.uuid
+            uuid: user.uuid,
+            token: token
         });
 
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Internal Server Error" });
     }
-};
-
-export const logout = (req, res) => {
-    res.cookie("token", "", {
-        httpOnly: true,
-        secure: true, // set true in production (HTTPS)
-        sameSite: "lax",
-        expires: new Date(0)
-    });
-
-    return res.status(200).json({ message: "Logged out" });
 };
 
 export const deleteAccount = async (req, res) => {
