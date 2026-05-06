@@ -1,11 +1,11 @@
 import mysql from 'mysql2/promise';
 
-const host = '172.17.0.3';
 const user = 'user';
 const database = 'db';
 
 export async function getConnection() {
     const DB_PASSWORD = process.env.DB_PASSWORD;
+    const host = process.env.DB_HOST;
 
     try {
         return await mysql.createConnection({
@@ -25,6 +25,7 @@ export async function getPool() {
 
     try {
         const DB_PASSWORD = process.env.DB_PASSWORD;
+        const host = process.env.DB_HOST;
 
         pool = await mysql.createPool({
             host,
