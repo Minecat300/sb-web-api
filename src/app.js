@@ -4,7 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
-dotenv.config({ path: "../.env", debug: true });
+dotenv.config();
 
 import authRoutes from "./v1/routes/authRoutes.js";
 import newEmployeeRoutes from "./v1/routes/newUserRoutes.js";
