@@ -7,7 +7,7 @@ export async function addNewEmployee(employee) {
     try {
         const { first_name, last_name, display_name, username, email, start_date, department } = employee;
         const [result] = await conn.query(
-            `INSERT INTO new_employees (first_name, last_name, display_name, username, email, start_date, department, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            `INSERT INTO NEW_EMPLOYEES (first_name, last_name, display_name, username, email, start_date, department, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
             [first_name, last_name, display_name, username, email, start_date, department, 'pending']
         );
         return { id: result.insertId, ...employee };
@@ -22,7 +22,7 @@ export async function getAllNewEmployees() {
     const pool = await getPool();
     const conn = await pool.getConnection();
     try {
-        const [rows] = await conn.query(`SELECT * FROM new_employees WHERE status = 'pending'`);
+        const [rows] = await conn.query(`SELECT * FROM NEW_EMPLOYEES WHERE status = 'pending'`);
         return rows;
     } catch (error) {
         throw error;
@@ -35,7 +35,7 @@ export async function activateNewEmployee(id) {
     const pool = await getPool();
     const conn = await pool.getConnection();
     try {
-        await conn.query(`UPDATE new_employees SET status = 'active' WHERE id = ?`, [id]);
+        await conn.query(`UPDATE NEW_EMPLOYEES SET status = 'active' WHERE id = ?`, [id]);
     } catch (error) {
         throw error;
     } finally {
@@ -47,7 +47,7 @@ export async function deactivateNewEmployee(id) {
     const pool = await getPool();
     const conn = await pool.getConnection();
     try {
-        await conn.query(`UPDATE new_employees SET status = 'inactive' WHERE id = ?`, [id]);
+        await conn.query(`UPDATE NEW_EMPLOYEES SET status = 'inactive' WHERE id = ?`, [id]);
     } catch (error) {
         throw error;
     } finally {        
@@ -59,7 +59,7 @@ export async function deleteNewEmployee(id) {
     const pool = await getPool();
     const conn = await pool.getConnection();
     try {
-        await conn.query(`DELETE FROM new_employees WHERE id = ?`, [id]);
+        await conn.query(`DELETE FROM NEW_EMPLOYEES WHERE id = ?`, [id]);
     } catch (error) {
         throw error;
     } finally {
@@ -73,7 +73,7 @@ export async function updateNewEmployee(id, employee) {
     try {
         const { first_name, last_name, display_name, username, email, start_date, department } = employee;
         await conn.query(
-            `UPDATE new_employees SET first_name = ?, last_name = ?, display_name = ?, username = ?, email = ?, start_date = ?, department = ? WHERE id = ?`,
+            `UPDATE NEW_EMPLOYEES SET first_name = ?, last_name = ?, display_name = ?, username = ?, email = ?, start_date = ?, department = ? WHERE id = ?`,
             [first_name, last_name, display_name, username, email, start_date, department, id]
         );
     } catch (error) {
@@ -87,7 +87,7 @@ export async function getNewEmployeeById(id) {
     const pool = await getPool();
     const conn = await pool.getConnection();
     try {
-        const [rows] = await conn.query(`SELECT * FROM new_employees WHERE id = ?`, [id]);
+        const [rows] = await conn.query(`SELECT * FROM NEW_EMPLOYEES WHERE id = ?`, [id]);
         return rows[0];
     } catch (error) {
         throw error;
@@ -100,7 +100,7 @@ export async function getNewEmployeeByStatus(status) {
     const pool = await getPool();
     const conn = await pool.getConnection();
     try {
-        const [rows] = await conn.query(`SELECT * FROM new_employees WHERE status = ?`, [status]);
+        const [rows] = await conn.query(`SELECT * FROM NEW_EMPLOYEES WHERE status = ?`, [status]);
         return rows;
     } catch (error) {
         throw error;
@@ -113,7 +113,7 @@ export async function getNewEmployeeByUsername(username) {
     const pool = await getPool();
     const conn = await pool.getConnection();
     try {
-        const [rows] = await conn.query(`SELECT * FROM new_employees WHERE username = ?`, [username]);
+        const [rows] = await conn.query(`SELECT * FROM NEW_EMPLOYEES WHERE username = ?`, [username]);
         return rows[0];
     } catch (error) {
         throw error;
