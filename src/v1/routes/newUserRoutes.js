@@ -4,7 +4,6 @@ import {
     createNewEmployee,
     activateNewEmployeeController,
     deactivateNewEmployeeController,
-    deactivateNewEmployeeController,
     getNewEmployee,
     getNewEmployeeByUsernameController,
     getNewEmployeesByStatus,
@@ -42,3 +41,5 @@ router.put('/deactivate/:id', authenticateToken, authorizeRole('management', 'ad
 
 //DELETE | localhost:3868/api/v1/new-employees/:id
 router.delete('/:id', authenticateToken, authorizeRole('admin'), deleteNewEmployeeController);
+
+export default router;
