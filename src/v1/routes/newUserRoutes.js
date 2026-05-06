@@ -21,6 +21,12 @@ router.post('/', authenticateToken, authorizeRole('management', 'admin'), create
 //GET | localhost:3868/api/v1/new-employees
 router.get('/', authenticateToken, authorizeRole('management', 'admin'), getNewEmployees);
 
+//GET | localhost:3868/api/v1/new-employees/active
+router.get('/active', authenticateToken, authorizeRole('management', 'admin'), getAllActiveNewEmployees);
+
+//GET | localhost:3868/api/v1/new-employees/inactive
+router.get('/inactive', authenticateToken, authorizeRole('management', 'admin'), getAllInactiveNewEmployees);
+
 //GET | localhost:3868/api/v1/new-employees/:id
 router.get('/:id', authenticateToken, authorizeRole('management', 'admin'), getNewEmployee);
 
