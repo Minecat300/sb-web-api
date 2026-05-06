@@ -1,4 +1,4 @@
-import { getConnection, getPool } from "./db.js";
+import { getConnection, getPool } from "../data/db.js";
 import { randomUUID } from "crypto";
 
 export async function createUser(email, username, passwordHash, roles = []) {

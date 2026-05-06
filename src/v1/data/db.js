@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
 
-const user = 'user';
-const database = 'db';
+const user = process.env.DB_USER;
+const database = process.env.DB_NAME;
 
 export async function getConnection() {
     const DB_PASSWORD = process.env.DB_PASSWORD;
