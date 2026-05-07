@@ -10,9 +10,9 @@ import {
     getNewEmployees,
     updateNewEmployeeController,
     deleteNewEmployeeController,
-    getAllActiveNewEmployees,
-    getAllInactiveNewEmployees,
-    getAllPendingNewEmployees
+    getAllActiveNewEmployeesController,
+    getAllInactiveNewEmployeesController,
+    getAllPendingNewEmployeesController
 } from "../controllers/newUserController.js";
 import { authenticateToken, authorizeRole } from "../middleware/authMiddleware.js";
 
@@ -25,13 +25,13 @@ router.post('/', authenticateToken, authorizeRole('management', 'admin'), create
 router.get('/', authenticateToken, authorizeRole('management', 'admin'), getNewEmployees);
 
 //GET | localhost:3868/api/v1/new-employees/active
-router.get('/active', authenticateToken, authorizeRole('management', 'admin'), getAllActiveNewEmployees);
+router.get('/active', authenticateToken, authorizeRole('management', 'admin'), getAllActiveNewEmployeesController);
 
 //GET | localhost:3868/api/v1/new-employees/inactive
-router.get('/inactive', authenticateToken, authorizeRole('management', 'admin'), getAllInactiveNewEmployees);
+router.get('/inactive', authenticateToken, authorizeRole('management', 'admin'), getAllInactiveNewEmployeesController);
 
 //GET | localhost:3868/api/v1/new-employees/pending
-router.get('/pending', authenticateToken, authorizeRole('management', 'admin'), getAllPendingNewEmployees);
+router.get('/pending', authenticateToken, authorizeRole('management', 'admin'), getAllPendingNewEmployeesController);
 
 //GET | localhost:3868/api/v1/new-employees/:id
 router.get('/:id', authenticateToken, authorizeRole('management', 'admin'), getNewEmployee);
